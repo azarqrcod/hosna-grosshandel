@@ -1,0 +1,150 @@
+:root {
+  --red: #d71920;
+  --black: #111111;
+  --white: #ffffff;
+  --soft-gray: #f4f4f4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--black);
+  background: var(--white);
+}
+
+.page {
+  width: min(100%, 560px);
+  margin: 0 auto;
+  padding: 28px 16px 72px;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.logo {
+  width: min(220px, 72vw);
+  height: auto;
+  opacity: 0;
+  animation: logoFadeIn 700ms ease-out forwards;
+}
+
+@keyframes logoFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.links {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 34px;
+}
+
+.link-button {
+  display: block;
+  width: 100%;
+  padding: 15px 18px;
+  border: 2px solid var(--black);
+  border-radius: 10px;
+  color: var(--white);
+  background: var(--red);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+}
+
+.link-button:focus-visible,
+.close-button:focus-visible,
+.product-button:focus-visible {
+  outline: 3px solid var(--black);
+  outline-offset: 3px;
+}
+
+.products h1 {
+  margin: 0 0 16px;
+  font-size: 1.35rem;
+  text-align: center;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.product-button {
+  display: block;
+  padding: 0;
+  border: 2px solid var(--black);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--soft-gray);
+  cursor: pointer;
+}
+
+.product-button img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.image-dialog {
+  width: min(92vw, 720px);
+  padding: 42px 12px 12px;
+  border: 2px solid var(--black);
+  border-radius: 12px;
+  background: var(--white);
+}
+
+.image-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.72);
+}
+
+.image-dialog img {
+  display: block;
+  width: 100%;
+  max-height: 78vh;
+  object-fit: contain;
+}
+
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  color: var(--white);
+  background: var(--black);
+  font-size: 1.4rem;
+  line-height: 30px;
+  cursor: pointer;
+}
+
+.footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 14px 16px;
+  border-top: 1px solid var(--black);
+  color: var(--white);
+  background: var(--black);
+  font-size: 0.9rem;
+  text-align: center;
+}

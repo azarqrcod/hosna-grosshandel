@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HOSNA Grosshandel</title>
+    <link rel="icon" href="assets/favicon.png" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="header">
+        <img class="logo" src="assets/logo.png" alt="HOSNA Logo" />
+      </header>
+
+      <nav class="links" aria-label="Kontakt und Links">
+        <a class="link-button" id="whatsappLink" href="#">WhatsApp</a>
+        <a class="link-button" id="instagramLink" href="#">Instagram</a>
+        <a class="link-button" id="emailLink" href="#">Email</a>
+        <a class="link-button" id="mapsLink" href="#">Google Maps</a>
+        <a class="link-button" href="#products">Products</a>
+      </nav>
+
+      <section class="products" id="products" aria-labelledby="productsTitle">
+        <h1 id="productsTitle">Products</h1>
+        <div class="product-grid" id="productGrid"></div>
+      </section>
+    </main>
+
+    <dialog class="image-dialog" id="imageDialog" aria-label="Produktbild">
+      <button class="close-button" id="closeDialog" type="button" aria-label="Schließen">×</button>
+      <img id="largeImage" alt="" />
+    </dialog>
+
+    <footer class="footer">AzarCore © 2026</footer>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
