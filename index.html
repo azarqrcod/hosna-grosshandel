@@ -3,40 +3,54 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>HOSNA Grosshandel</title>
+    <title>HOSNA GROSSHANDELN</title>
     <link rel="icon" href="assets/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <main class="page">
-      <header class="header">
-        <img class="logo" src="assets/logo.png" alt="HOSNA Logo" />
-      </header>
-
-      <nav class="links" aria-label="Kontakt und Links">
-        <a class="link-button" id="whatsappLink" href="#">WhatsApp</a>
-        <a class="link-button" id="instagramLink" href="#">Instagram</a>
-        <a class="link-button" id="emailLink" href="#">E-Mail</a>
-        <a class="link-button" id="mapsLink" href="#">Google Maps</a>
-        <a class="link-button" href="#produkte">Produkte</a>
-      </nav>
-
-      <address class="address">
-        Herzbergstraße 128<br />
-        Halle 6<br />
-        Raum 638<br />
-        10365 Berlin
-      </address>
-
-      <section class="products" id="produkte" aria-labelledby="productsTitle">
-        <h1 id="productsTitle">Produkte</h1>
-        <div class="product-grid" id="productGrid"></div>
+    <main class="app-shell">
+      <section class="hero reveal" aria-labelledby="heroTitle">
+        <div class="orb orb-one" aria-hidden="true"></div>
+        <div class="orb orb-two" aria-hidden="true"></div>
+        <img class="logo" src="assets/logo.png" alt="HOSNA GROSSHANDELN Logo" />
+        <p class="eyebrow">Willkommen bei</p>
+        <h1 id="heroTitle">HOSNA GROSSHANDELN</h1>
+        <p class="hero-subtitle">Ihr zuverlässiger Großhandelspartner in Berlin</p>
       </section>
 
-      <section class="azarcore" aria-labelledby="azarcoreTitle">
-        <h2 id="azarcoreTitle">Brauchst du deine eigene QR-Website?</h2>
-        <p>Professionelle QR-Websites für Unternehmen.</p>
-        <a class="link-button azarcore-button" href="https://azarqrcod.github.io/azarcore">AzarCore besuchen</a>
+      <nav class="contact-panel reveal" aria-label="Kontakt">
+        <a class="glass-button" id="whatsappLink" href="#">
+          <img src="assets/icons/whatsapp.svg" alt="" aria-hidden="true" />
+          <span>WhatsApp</span>
+        </a>
+        <a class="glass-button" id="instagramLink" href="#">
+          <img src="assets/icons/instagram.svg" alt="" aria-hidden="true" />
+          <span>Instagram</span>
+        </a>
+        <a class="glass-button" id="emailLink" href="#">
+          <img src="assets/icons/email.svg" alt="" aria-hidden="true" />
+          <span>E-Mail</span>
+        </a>
+        <a class="glass-button" id="mapsLink" href="#">
+          <img src="assets/icons/location.svg" alt="" aria-hidden="true" />
+          <span>Google Maps</span>
+        </a>
+      </nav>
+
+      <section class="products reveal" aria-labelledby="productsTitle">
+        <div class="section-kicker">Unsere Auswahl</div>
+        <h2 id="productsTitle">UNSERE PRODUKTE</h2>
+        <div class="product-grid" id="productGrid" aria-live="polite"></div>
+      </section>
+
+      <section class="azarcore-card reveal" aria-labelledby="azarcoreTitle">
+        <div class="card-shine" aria-hidden="true"></div>
+        <h2 id="azarcoreTitle">Brauchen Sie Ihre eigene QR-Website?</h2>
+        <p>Professionelle QR-Webseiten für Unternehmen.</p>
+        <a class="azarcore-link" href="https://azarqrcod.github.io/azarcore">AzarCore besuchen</a>
       </section>
     </main>
 
