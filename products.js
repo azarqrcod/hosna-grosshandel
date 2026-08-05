@@ -1,71 +1,56 @@
-const config = window.HOSNA_CONFIG || { products: [] };
 const productGrid = document.getElementById('productGrid');
-const imageExtensions = ['jpg', 'jpeg', 'png', 'webp', 'avif', 'gif'];
-const configuredProducts = Array.isArray(config.products) ? config.products : [];
-const maxProductNumber = Number.isInteger(config.maxProductNumber) ? config.maxProductNumber : 9999;
+const productsApi = 'https://api.github.com/repos/azarqrcod/hosna-grosshandel/contents/products?ref=main';
+const supportedImage = /\.(?:jpe?g|png|webp)$/i;
 
-function createProductTile(src, index) {
-  const card = document.createElement('article');
-  const image = document.createElement('img');
-
-  card.className = 'temu-product-card';
-  image.src = src;
-  image.alt = `Produktbild ${index}`;
-  image.loading = 'lazy';
-  image.decoding = 'async';
-
-  card.appendChild(image);
-  productGrid.appendChild(card);
+function showStatus(message) {
+  productGrid.replaceChildren();
+  const status = document.createElement('p');
+  status.className = 'gallery-status';
+  status.textContent = message;
+  productGrid.appendChild(status);
 }
 
-function testImage(src) {
-  return new Promise((resolve) => {
-    const image = new Image();
+function productNumber(filename) {
+  const match = filename.match(/\d+/);
+  return match ? Number(match[0]) : Number.MAX_SAFE_INTEGER;
+}
 
-    image.onload = () => resolve(src);
-    image.onerror = () => resolve(null);
-    image.src = src;
+function showProducts(files) {
+  productGrid.replaceChildren();
+
+  files.forEach((file, index) => {
+    const card = document.createElement('div');
+    const image = document.createElement('img');
+    card.className = 'product-card';
+    image.src = file.download_url;
+    image.alt = `Produktbild ${index + 1}`;
+    image.loading = 'lazy';
+    image.decoding = 'async';
+    card.appendChild(image);
+    productGrid.appendChild(card);
   });
 }
 
-async function findNumberedProduct(number) {
-  const paddedNumber = String(number).padStart(3, '0');
+async function loadProducts() {
+  try {
+    const response = await fetch(productsApi, { headers: { Accept: 'application/vnd.github+json' } });
+    if (!response.ok) throw new Error(`GitHub API returned ${response.status}`);
 
-  for (const extension of imageExtensions) {
-    const src = `products/${paddedNumber}.${extension}`;
-    const foundImage = await testImage(src);
+    const contents = await response.json();
+    const images = contents
+      .filter((item) => item.type === 'file' && supportedImage.test(item.name))
+      .sort((a, b) => productNumber(a.name) - productNumber(b.name) || a.name.localeCompare(b.name, undefined, { numeric: true }));
 
-    if (foundImage) {
-      return foundImage;
+    if (images.length === 0) {
+      showStatus('Noch keine Produkte verfügbar.');
+      return;
     }
-  }
 
-  return null;
-}
-
-async function loadNumberedProducts() {
-  let visibleIndex = 1;
-
-  for (let number = 1; number <= maxProductNumber; number += 1) {
-    const src = await findNumberedProduct(number);
-
-    if (src) {
-      createProductTile(src, visibleIndex);
-      visibleIndex += 1;
-    }
+    showProducts(images);
+  } catch (error) {
+    console.error('Produkte konnten nicht geladen werden.', error);
+    showStatus('Produkte konnten nicht geladen werden.');
   }
 }
 
-function loadConfiguredProducts() {
-  configuredProducts
-    .filter((product) => /\.(avif|gif|jpe?g|png|webp)$/i.test(product))
-    .forEach((product, index) => createProductTile(`products/${product}`, index + 1));
-}
-
-if (productGrid) {
-  if (configuredProducts.length > 0) {
-    loadConfiguredProducts();
-  } else {
-    loadNumberedProducts();
-  }
-}
+if (productGrid) loadProducts();
