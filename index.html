@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <main class="app-shell">
+    <main class="app-shell app-shell--short">
       <section class="hero reveal" aria-labelledby="heroTitle">
         <div class="orb orb-one" aria-hidden="true"></div>
         <div class="orb orb-two" aria-hidden="true"></div>
@@ -40,11 +40,10 @@
         </a>
       </nav>
 
-      <section class="products reveal" aria-labelledby="productsTitle">
-        <div class="section-kicker">Unsere Auswahl</div>
-        <h2 id="productsTitle">UNSERE PRODUKTE</h2>
-        <div class="product-grid" id="productGrid" aria-live="polite"></div>
-      </section>
+      <a class="products-link reveal" href="produkte.html" aria-label="Unsere Produkte ansehen">
+        <img src="assets/icons/products.svg" alt="" aria-hidden="true" />
+        <span>UNSERE PRODUKTE</span>
+      </a>
 
       <section class="azarcore-card reveal" aria-labelledby="azarcoreTitle">
         <div class="card-shine" aria-hidden="true"></div>
@@ -53,11 +52,6 @@
         <a class="azarcore-link" href="https://azarqrcod.github.io/azarcore">AzarCore besuchen</a>
       </section>
     </main>
-
-    <dialog class="image-dialog" id="imageDialog" aria-label="Produktbild">
-      <button class="close-button" id="closeDialog" type="button" aria-label="Schließen">×</button>
-      <img id="largeImage" alt="" />
-    </dialog>
 
     <footer class="footer">AzarCore © 2026</footer>
 

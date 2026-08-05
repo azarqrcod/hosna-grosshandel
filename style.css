@@ -55,12 +55,14 @@ body::after {
   padding: 28px 16px 88px;
 }
 
+.app-shell--short { padding-bottom: 42px; }
+
 .hero {
   position: relative;
   display: grid;
   justify-items: center;
-  min-height: 54vh;
-  padding: 36px 16px 28px;
+  min-height: 42vh;
+  padding: 32px 16px 26px;
   overflow: hidden;
   text-align: center;
   border: 1px solid rgba(212, 175, 55, 0.2);
@@ -117,10 +119,11 @@ h1 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 13px;
-  margin: 20px 0 46px;
+  margin: 20px 0 18px;
 }
 
 .glass-button,
+.products-link,
 .azarcore-link {
   position: relative;
   display: flex;
@@ -144,6 +147,7 @@ h1 {
 }
 
 .glass-button::after,
+.products-link::after,
 .azarcore-link::after {
   position: absolute;
   inset: 0;
@@ -154,12 +158,23 @@ h1 {
   transition: opacity 220ms ease, transform 520ms ease;
 }
 
-.glass-button img { width: 24px; height: 24px; filter: brightness(0) invert(1) sepia(1) saturate(4) hue-rotate(2deg); }
-.glass-button span, .azarcore-link { z-index: 1; }
+.glass-button img,
+.products-link img { width: 24px; height: 24px; filter: brightness(0) invert(1) sepia(1) saturate(4) hue-rotate(2deg); }
+.glass-button span, .products-link span, .azarcore-link { z-index: 1; }
+
+.products-link {
+  width: 100%;
+  min-height: 64px;
+  margin: 0 0 30px;
+  color: var(--gold);
+  background: linear-gradient(145deg, rgba(25, 22, 14, 0.86), rgba(0, 0, 0, 0.82));
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
 
 .glass-button:hover,
+.products-link:hover,
 .azarcore-link:hover,
-.product-button:hover,
 .azarcore-card:hover {
   border-color: var(--gold);
   box-shadow: 0 18px 48px rgba(212, 175, 55, 0.18), 0 16px 38px rgba(0, 0, 0, 0.5);
@@ -167,38 +182,101 @@ h1 {
 }
 
 .glass-button:hover::after,
+.products-link:hover::after,
 .azarcore-link:hover::after { opacity: 1; transform: translateX(75%); }
 
 .glass-button:active,
+.products-link:active,
 .azarcore-link:active,
-.product-button:active,
-.close-button:active { transform: scale(0.96); }
+.back-button:active { transform: scale(0.96); }
 
 .glass-button:focus-visible,
+.products-link:focus-visible,
 .azarcore-link:focus-visible,
-.product-button:focus-visible,
-.close-button:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.back-button:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
 
-.products { margin-bottom: 44px; text-align: center; }
-.products h2 { margin-bottom: 20px; font-size: clamp(2rem, 9vw, 3.25rem); line-height: 0.95; }
-
-.product-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
-
-.product-button {
-  display: none;
-  padding: 0;
-  overflow: hidden;
-  border: 1px solid rgba(212, 175, 55, 0.18);
-  border-radius: 21px;
-  background: var(--glass);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.42);
-  cursor: pointer;
-  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+.products-page {
+  padding-top: 104px;
+  background:
+    radial-gradient(circle at 50% -8%, rgba(212, 175, 55, 0.13), transparent 30rem),
+    linear-gradient(180deg, #11100d 0%, #070707 100%);
 }
 
-.product-button.is-loaded { display: block; animation: productIn 520ms ease both; }
-.product-button img { display: block; width: 100%; aspect-ratio: 1 / 1.16; object-fit: cover; transition: transform 500ms ease; }
-.product-button:hover img { transform: scale(1.07); }
+.products-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 46px 58px 1fr;
+  gap: 11px;
+  align-items: center;
+  min-height: 88px;
+  padding: 12px max(14px, calc((100vw - 520px) / 2 + 14px));
+  border-bottom: 1px solid rgba(212, 175, 55, 0.22);
+  background: rgba(8, 8, 8, 0.84);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(18px);
+}
+
+.back-button {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  color: var(--gold);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.74));
+  font-size: 2.1rem;
+  line-height: 1;
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.back-button:hover { border-color: var(--gold); box-shadow: 0 12px 30px rgba(212, 175, 55, 0.16); transform: translateY(-2px); }
+
+.header-logo {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.24));
+}
+
+.header-title-wrap { min-width: 0; }
+.header-kicker { margin: 0 0 2px; color: var(--gold); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.28em; }
+.products-header h1 { font-size: clamp(1.65rem, 7vw, 2.35rem); line-height: 0.95; }
+
+.products-shell {
+  width: min(100%, 520px);
+  margin: 0 auto;
+  padding: 12px 8px 34px;
+}
+
+.temu-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.temu-product-card {
+  min-width: 0;
+  padding: 6px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+  animation: productIn 420ms ease both;
+}
+
+.temu-product-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 11px;
+  object-fit: contain;
+}
 
 .azarcore-card {
   position: relative;
@@ -217,33 +295,15 @@ h1 {
 .azarcore-link { min-height: 56px; width: 100%; max-width: 260px; margin: 0 auto; }
 .card-shine { position: absolute; inset: -40% -20% auto; height: 120px; background: rgba(212, 175, 55, 0.14); filter: blur(28px); transform: rotate(-12deg); }
 
-.image-dialog {
-  width: min(94vw, 760px);
-  padding: 52px 12px 12px;
-  border: 1px solid rgba(212, 175, 55, 0.5);
-  border-radius: 28px;
-  background: rgba(5, 5, 5, 0.86);
-  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.72), 0 0 50px rgba(212, 175, 55, 0.14);
-  animation: dialogIn 230ms ease both;
-  backdrop-filter: blur(22px);
-}
-.image-dialog::backdrop { background: rgba(0, 0, 0, 0.76); backdrop-filter: blur(10px); }
-.image-dialog img { display: block; width: 100%; max-height: 78vh; border-radius: 20px; object-fit: contain; animation: zoomIn 260ms ease both; }
-.close-button { position: absolute; top: 11px; right: 12px; width: 34px; height: 34px; border: 1px solid rgba(212, 175, 55, 0.55); border-radius: 50%; color: var(--gold); background: rgba(0, 0, 0, 0.72); font-size: 1.45rem; line-height: 30px; cursor: pointer; transition: transform 180ms ease, box-shadow 180ms ease; }
-.close-button:hover { box-shadow: 0 0 20px rgba(212, 175, 55, 0.28); }
-
 .footer { padding: 22px 16px 30px; color: rgba(255,255,255,0.52); font-size: 0.85rem; text-align: center; }
 .reveal { opacity: 0; transform: translateY(18px); animation: fadeUp 720ms cubic-bezier(.2,.8,.2,1) forwards; }
 .contact-panel { animation-delay: 130ms; }
-.products { animation-delay: 240ms; }
-.azarcore-card { animation-delay: 340ms; }
+.products-link { animation-delay: 220ms; }
+.azarcore-card { animation-delay: 320ms; }
 
 @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 @keyframes logoFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
 @keyframes cinematicSweep { 0%,100% { opacity: .45; transform: translateX(-12%); } 50% { opacity: 1; transform: translateX(12%); } }
 @keyframes productIn { from { opacity: 0; transform: translateY(10px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
-@keyframes dialogIn { from { opacity: 0; transform: translateY(12px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
-@keyframes zoomIn { from { transform: scale(.96); } to { transform: scale(1); } }
-
-@media (min-width: 560px) { .app-shell { padding-top: 38px; } .product-grid { gap: 14px; } }
+@media (min-width: 560px) { .app-shell { padding-top: 38px; } .temu-gallery { gap: 10px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 1ms !important; scroll-behavior: auto !important; transition-duration: 1ms !important; } }
